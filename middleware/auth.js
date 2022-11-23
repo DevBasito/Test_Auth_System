@@ -2,8 +2,9 @@ const jwt = require("jsonwebtoken")
 require('dotenv').config();
 const {SECRET} = process.env
 
-module.exports = (req, res, next) => {
-    const token = req.header("x-auth-token")
+exports.authenticateUsers = (req, res, next) => {
+    const token = req.headers.authorization;
+    
 
     if (!token) {
         return res.status(401).json({
@@ -26,4 +27,15 @@ module.exports = (req, res, next) => {
         
         
     }
+}
+
+exports.checkIfAdmin = (req, res, next) => {
+    if (req.user.role !== 'admin' ){
+        res.status(401).json({
+            message: 'Sorry!, This route can only be accessed by Admin'
+        })
+    }
+
+    return next();
+
 }

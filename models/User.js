@@ -24,11 +24,11 @@ const UserSchema = mongoose.Schema(
         password: {
             type: String,
         },
-        // userRole: {
-        //     type: String,
-        //     enum: ['admin', 'tutor', 'student', 'not assigned'],
-        //     default: 'not assigned'
-        // },
+        role: {
+            type: String,
+            enum: ['admin', 'regular'],
+            default: 'regular'
+        },
         // isAdmin: {
         //     type: Boolean,
         //     default: 0
