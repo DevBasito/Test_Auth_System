@@ -3,7 +3,6 @@ const { validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt');
 const express = require('express');
-const { findByIdAndDelete, findOneAndDelete } = require('../models/User');
 const { SECRET } = process.env
 
 exports.registerNewUser = (req, res) => {
@@ -25,7 +24,8 @@ exports.registerNewUser = (req, res) => {
     firstname: firstname,
     lastname: lastname,
     username: username,
-    email: email
+    email: email,
+    role: role
   }, (err, newuser) => {
     if (err) {
       return res.status(500).json({ err })
@@ -172,7 +172,7 @@ exports.getLoggedInUser = async (req, res) => {
       message: "User gotten successfully",
       user
     })
-findOneAndDelete
+
 
   } catch (error) {
     res.status(500).send("Server Error")
